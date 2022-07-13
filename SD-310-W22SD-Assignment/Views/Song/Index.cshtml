@@ -1,0 +1,14 @@
+﻿@model IEnumerable<SD_310_W22SD_Assignment.Models.Song>
+
+@using (@Html.BeginForm("Index", "Song", FormMethod.Get))
+{
+    @Html.DropDownList("artistId", new SelectList(ViewData["Artists"] as List<Artist>, "Id", "Name"))
+    <button type="submit">Select</button>
+}
+
+<ul>
+    @foreach(var song in Model)
+    {
+        <li>@song.Title - @song.Collections.Count()</li>
+    }
+</ul>

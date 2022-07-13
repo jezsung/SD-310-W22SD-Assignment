@@ -1,0 +1,18 @@
+﻿@model SD_310_W22SD_Assignment.Models.Collection
+
+@using (@Html.BeginForm("Add", "Collection"))
+{
+    <div>
+        @Html.LabelFor(m => m.UserId, "User")
+        @Html.DropDownListFor(m => m.UserId, new SelectList(ViewData["Users"] as List<User>, "Id", "Name"))
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.SongId, "Song")
+        @Html.DropDownListFor(m => m.SongId, new SelectList(ViewData["Songs"] as List<Song>, "Id", "Title"))
+    </div>
+
+    <div>
+        <input type="submit" value="Add" />
+    </div>
+}

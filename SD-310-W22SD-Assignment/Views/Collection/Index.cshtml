@@ -1,0 +1,27 @@
+﻿@model Dictionary<string, List<SD_310_W22SD_Assignment.Models.Song>>
+
+<p>
+    <a asp-controller="Collection" asp-action="Add">Add to Collection</a>
+</p>
+
+@using (@Html.BeginForm("Index", "Collection", FormMethod.Get))
+{
+    @Html.DropDownList("userId", new SelectList(ViewData["Users"] as List<User>, "Id", "Name"))
+    <button type="submit">Select</button>
+}
+
+
+<ul>
+    @foreach (var artistAndSongs in Model)
+    {
+        <li>
+            @artistAndSongs.Key
+            <ul>
+                @foreach (var song in artistAndSongs.Value)
+                {
+                    <li>@song.Title</li>
+                }
+            </ul>
+        </li>
+    }
+</ul>

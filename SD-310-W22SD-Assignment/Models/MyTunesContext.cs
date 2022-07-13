@@ -34,8 +34,6 @@ namespace SD_310_W22SD_Assignment.Models
         {
             modelBuilder.Entity<Artist>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Name)
                     .HasMaxLength(255)
                     .IsUnicode(false);
@@ -43,8 +41,6 @@ namespace SD_310_W22SD_Assignment.Models
 
             modelBuilder.Entity<Collection>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.HasOne(d => d.Song)
                     .WithMany(p => p.Collections)
                     .HasForeignKey(d => d.SongId)
@@ -60,8 +56,6 @@ namespace SD_310_W22SD_Assignment.Models
 
             modelBuilder.Entity<Song>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Title)
                     .HasMaxLength(255)
                     .IsUnicode(false);
@@ -75,8 +69,6 @@ namespace SD_310_W22SD_Assignment.Models
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Name)
                     .HasMaxLength(255)
                     .IsUnicode(false);
