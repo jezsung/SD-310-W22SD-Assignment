@@ -18,6 +18,8 @@ namespace SD_310_W22SD_Assignment.Models
 
         public virtual DbSet<Artist> Artists { get; set; } = null!;
         public virtual DbSet<Collection> Collections { get; set; } = null!;
+        public virtual DbSet<Purchase> Purchases { get; set; } = null!;
+        public virtual DbSet<Rating> Ratings { get; set; } = null!;
         public virtual DbSet<Song> Songs { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
@@ -26,7 +28,7 @@ namespace SD_310_W22SD_Assignment.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-3E90RUI\\SQLEXPRESS;Database=MyTunes;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=desktop-3e90rui\\sqlexpress;Database=MyTunes;Trusted_Connection=True;");
             }
         }
 
@@ -52,6 +54,40 @@ namespace SD_310_W22SD_Assignment.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Collections_Users");
+            });
+
+            modelBuilder.Entity<Purchase>(entity =>
+            {
+                entity.Property(e => e.PurchasedAt).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Song)
+                    .WithMany(p => p.Purchases)
+                    .HasForeignKey(d => d.SongId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Purchases_Songs");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Purchases)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Purchases_Users");
+            });
+
+            modelBuilder.Entity<Rating>(entity =>
+            {
+                entity.Property(e => e.Rating1).HasColumnName("Rating");
+
+                entity.HasOne(d => d.Song)
+                    .WithMany(p => p.Ratings)
+                    .HasForeignKey(d => d.SongId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Ratings_Songs");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Ratings)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Ratings_Users");
             });
 
             modelBuilder.Entity<Song>(entity =>

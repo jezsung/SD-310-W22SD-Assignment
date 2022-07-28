@@ -1,0 +1,27 @@
+﻿@using (@Html.BeginForm("Index", "SongList", FormMethod.Get))
+{
+    @Html.DropDownList("userId", new SelectList(ViewData["Users"] as List<User>, "Id", "Name"))
+    <button type="submit">Select</button>
+}
+
+<div class="error">@ViewBag.ErrorMessage</div>
+
+<ul>
+    @foreach (var song in ViewData["Songs"] as List<Song>)
+    {
+        <li>
+            @song.Title
+
+            @using (@Html.BeginForm("Buy", "SongList", new { UserId = ViewBag.UserId, songId = song.Id }))
+            {
+                <button type="submit">Buy</button>
+            }
+        </li>
+    }
+</ul>
+
+<style>
+    .error {
+        color: red;
+    }
+</style>

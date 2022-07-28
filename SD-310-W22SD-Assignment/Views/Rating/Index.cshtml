@@ -1,0 +1,28 @@
+﻿@if (ViewBag.Rating != null)
+{
+    <h2>Current Rating:</h2>
+    <div>@(ViewBag.Rating.Rating1)</div>
+}
+
+<div>
+    @using (@Html.BeginForm("Rate", "Rating", new { UserId = ViewBag.UserId, SongId = ViewBag.SongId, Rating1 = 1 }))
+    {
+        <button type="submit">1</button>
+    }
+    @using (@Html.BeginForm("Rate", "Rating", new { UserId = ViewBag.UserId, SongId = ViewBag.SongId, Rating1 = 2 }))
+    {
+        <button type="submit">2</button>
+    }
+    @using (@Html.BeginForm("Rate", "Rating", new { UserId = ViewBag.UserId, SongId = ViewBag.SongId, Rating1 = 3 }))
+    {
+        <button type="submit">3</button>
+    }
+    @using (@Html.BeginForm("Rate", "Rating", new { UserId = ViewBag.UserId, SongId = ViewBag.SongId, Rating1 = 4 }))
+    {
+        <button type="submit">4</button>
+    }
+    @using (@Html.BeginForm("Rate", "Rating", new { UserId = ViewBag.UserId, SongId = ViewBag.SongIdk, Rating1 = 5 }))
+    {
+        <button type="submit">5</button>
+    }
+</div>

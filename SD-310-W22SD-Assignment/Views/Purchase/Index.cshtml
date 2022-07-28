@@ -1,0 +1,24 @@
+﻿@model IEnumerable<SD_310_W22SD_Assignment.Models.Purchase>
+
+@using (@Html.BeginForm("Index", "Purchase", FormMethod.Get))
+{
+    @Html.DropDownList("userId", new SelectList(ViewBag.Users as List<User>, "Id", "Name"))
+    <button type="submit">Select</button>
+}
+
+<ul>
+    @foreach (var purchase in Model)
+    {
+        <li>
+            @purchase.Song.Title
+            @if ((DateTime.Now - purchase.PurchasedAt).TotalDays <= 30)
+            {
+                @using (@Html.BeginForm("Refund", "Purchase", new { userId = purchase.UserId, songId = purchase.SongId }))
+                {
+                    <button type="submit">Refund</button>
+                }
+            }
+            <a asp-action="Index" asp-controller="Rating" asp-route-userId=@purchase.UserId asp-route-songId=@purchase.SongId>Rate</a>
+        </li>
+    }
+</ul>

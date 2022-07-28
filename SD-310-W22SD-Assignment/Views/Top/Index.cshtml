@@ -1,0 +1,26 @@
+﻿<h2>Top Sold Song</h2>
+@{
+    var song = ViewData["TopSoldSong"] as Song;
+
+    <div>
+        @song.Title
+    </div>
+}
+
+<h2>Top Artist</h2>
+@{
+    var artist = ViewData["TopArtist"] as Artist;
+
+    <div>
+        @artist.Name
+    </div>
+}
+
+<h2>Top 3 Rated Songs</h2>
+@foreach (var topSong in ViewData["Top3RatedSongs"] as dynamic)
+{
+    <div>
+        @topSong.Key.Title - @topSong.Rating
+    </div>
+}
+

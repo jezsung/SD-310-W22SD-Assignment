@@ -1,0 +1,8 @@
+﻿<h2>Total Revenue</h2>
+<div>$@(ViewBag.Revenue)</div>
+
+@using (@Html.BeginForm("Index", "Revenue", FormMethod.Get))
+{
+    <input type="month" name="date" />
+    <button type="submit">Calculate</button>
+}
